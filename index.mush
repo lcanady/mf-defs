@@ -16,7 +16,7 @@
 // Object creation shortcuts
 
 // @make/thing <name>=<tag>[, <flag list>]
-#define @(.)make/thing (.*)=(.*)(?:,(.*))?
+#def @(.)make/thing (.*)=(.*)(?:,(.*))?
 
 @if not(isdbref(tags($3))) = { 
     @create $2;
