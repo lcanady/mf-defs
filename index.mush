@@ -1,0 +1,34 @@
+/*
+#############################################################################
+### Convenient mush-format #defines #########################################
+
+  This archive is my collection of shortcuts as a lazy MUSHCoder.  
+  Mostly they are patterns I've run into over and over again through the
+  years that I finally got tired of typing.  
+
+  Use anything you find here lightly. You don't want your code becoming
+  completely unreadable because it's full of #defines that noone can
+  look up a help for!
+
+#############################################################################
+*/
+
+// Object creation shortcuts
+
+// @make/thing <name>=<tag>[, <flag list>]
+#define @(.)make/thing (.*)=(.*)(?:,(.*))?
+
+@if not(isdbref(tags($3))) = { 
+    @create $2;
+    @tag/add $3=lastcreate(me, t);
+    @if words($4) = {
+        @set #$3 = $4;
+      }
+    @if strmatch(lcstr($1), g) = {
+        @set #$3 = safe no_modify inherit;
+        @tel #$3 = #[setr(0,config(master_room))];
+        @link #$3 = #%q0;
+      }
+  }
+
+#enddef
